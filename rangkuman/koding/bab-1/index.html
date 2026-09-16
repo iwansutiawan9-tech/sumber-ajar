@@ -1,1 +1,673 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bab 1: Berpikir Komputasional - Kelas V SD/MI</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-main: #f8faf9;
+      --card-bg: #ffffff;
+      --accent-soft-green: #e3ede6;
+      --accent-green: #486954;
+      --accent-light-green: #60856c;
+      --accent-soft-blue: #e4ecf5;
+      --accent-blue: #4a6fa5;
+      --accent-soft-peach: #faeee7;
+      --accent-peach: #b86b53;
+      --accent-soft-yellow: #fcf4dd;
+      --accent-yellow: #8f7429;
+      --text-main: #2d3748;
+      --text-muted: #64748b;
+      --border-subtle: #e9ecef;
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.03);
+      --shadow-md: 0 8px 24px rgba(72, 105, 84, 0.08);
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+    }
 
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.65;
+      padding-bottom: 60px;
+    }
+
+    /* Top Banner / Hero */
+    header {
+      background: linear-gradient(135deg, #f0f6f2 0%, #e8f0eb 50%, #e2ece8 100%);
+      padding: 50px 20px 40px;
+      text-align: center;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .badge-top {
+      display: inline-block;
+      background: #ffffff;
+      color: var(--accent-green);
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 6px 16px;
+      border-radius: 50px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 16px;
+      letter-spacing: 0.5px;
+    }
+
+    h1 {
+      font-family: 'Quicksand', sans-serif;
+      color: var(--accent-green);
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    p.subtitle {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Section Titles */
+    .section-title {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1.6rem;
+      color: var(--accent-green);
+      margin: 45px 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: var(--accent-soft-green);
+      border-radius: 10px;
+      font-size: 1.1rem;
+    }
+
+    /* Visual Mindmap / Concept Map */
+    .mindmap-wrapper {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-subtle);
+      margin-bottom: 30px;
+    }
+
+    .mindmap-core {
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-light-green));
+      color: white;
+      padding: 16px 24px;
+      border-radius: var(--radius-md);
+      text-align: center;
+      max-width: 360px;
+      margin: 0 auto 30px;
+      font-weight: 700;
+      font-size: 1.15rem;
+      box-shadow: 0 6px 16px rgba(72, 105, 84, 0.2);
+    }
+
+    .mindmap-branches {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .branch-card {
+      background: var(--bg-main);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      border-left: 4px solid var(--accent-green);
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .branch-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .branch-card.dekomposisi { border-left-color: #5c8374; }
+    .branch-card.pola { border-left-color: #4a6fa5; }
+    .branch-card.abstraksi { border-left-color: #b86b53; }
+    .branch-card.algoritma { border-left-color: #8f7429; }
+
+    .branch-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .branch-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* Rangkuman 4 Pilar Interactive Grid */
+    .pillar-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .pillar-box {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-subtle);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .pillar-box:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-3px);
+    }
+
+    .pillar-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .pb-green { background: var(--accent-soft-green); color: var(--accent-green); }
+    .pb-blue { background: var(--accent-soft-blue); color: var(--accent-blue); }
+    .pb-peach { background: var(--accent-soft-peach); color: var(--accent-peach); }
+    .pb-yellow { background: var(--accent-soft-yellow); color: var(--accent-yellow); }
+
+    .pillar-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .pillar-concept {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .pillar-example {
+      background: #fbfcfc;
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      font-size: 0.85rem;
+      border-left: 3px solid #cbd5e1;
+    }
+
+    .pillar-example strong {
+      display: block;
+      color: var(--text-main);
+      margin-bottom: 3px;
+    }
+
+    /* Rantai 5 Mengapa Card */
+    .five-why-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-subtle);
+      margin-bottom: 40px;
+    }
+
+    .why-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+
+    .why-number {
+      background: var(--accent-soft-green);
+      color: var(--accent-green);
+      font-weight: 700;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .why-content {
+      background: var(--bg-main);
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      width: 100%;
+    }
+
+    .why-content .q {
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+
+    .why-content .a {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+
+    /* Glossary Section with Search */
+    .glossary-wrapper {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 12px 18px;
+      border: 1px solid #d9e2ec;
+      border-radius: var(--radius-md);
+      font-family: inherit;
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+      outline: none;
+      transition: border 0.2s;
+      background: #fafbfc;
+    }
+
+    .search-box:focus {
+      border-color: var(--accent-green);
+      background: #fff;
+    }
+
+    .glossary-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .glossary-item {
+      padding: 16px;
+      background: var(--bg-main);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      transition: background 0.2s;
+    }
+
+    .glossary-term {
+      font-weight: 700;
+      color: var(--accent-green);
+      font-size: 1rem;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .glossary-def {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    /* Interactive Demo: Pseudocode Simulator */
+    .sim-card {
+      background: linear-gradient(135deg, #ffffff 0%, #f4f8f5 100%);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      border: 1px solid #d7e4db;
+      margin-top: 35px;
+    }
+
+    .code-box {
+      background: #2b3a42;
+      color: #e2e8f0;
+      font-family: monospace;
+      padding: 16px;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      margin: 14px 0;
+    }
+
+    .btn-action {
+      background: var(--accent-green);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.2s;
+    }
+
+    .btn-action:hover {
+      background: var(--accent-light-green);
+    }
+
+    #sim-output {
+      margin-top: 12px;
+      padding: 12px;
+      background: #fff;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      display: none;
+      border-left: 3px solid var(--accent-green);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 50px;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.75rem; }
+      .mindmap-wrapper { padding: 20px; }
+      .section-title { font-size: 1.35rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header / Hero -->
+  <header>
+    <div class="container">
+      <span class="badge-top">Koding & Kecerdasan Artifisial • Kelas V SD/MI</span>
+      <h1>Berpikir Komputasional</h1>
+      <p class="subtitle">Menemukan Solusi Sistematis, Teratur, dan Logis untuk Masalah Sehari-hari</p>
+    </div>
+  </header>
+
+  <main class="container">
+    
+    <!-- 1. Peta Konsep Visual -->
+    <h2 class="section-title"><span>🗺️</span> Peta Konsep Bab 1</h2>
+    <div class="mindmap-wrapper">
+      <div class="mindmap-core">BERPIKIR KOMPUTASIONAL</div>
+      <div class="mindmap-branches">
+        <div class="branch-card dekomposisi" onclick="filterGlossary('Dekomposisi')">
+          <div class="branch-title">1. Dekomposisi <span>🧩</span></div>
+          <div class="branch-desc">Memecah masalah rumit menjadi bagian-bagian yang lebih kecil.</div>
+        </div>
+        <div class="branch-card pola" onclick="filterGlossary('Pola')">
+          <div class="branch-title">2. Pengenalan Pola <span>🔍</span></div>
+          <div class="branch-desc">Mengenali kesamaan atau kejadian berulang untuk prediksi.</div>
+        </div>
+        <div class="branch-card abstraksi" onclick="filterGlossary('Abstraksi')">
+          <div class="branch-title">3. Abstraksi <span>🎯</span></div>
+          <div class="branch-desc">Fokus hanya pada inti informasi penting, abaikan yang sepele.</div>
+        </div>
+        <div class="branch-card algoritma" onclick="filterGlossary('Algoritma')">
+          <div class="branch-title">4. Algoritma <span>📋</span></div>
+          <div class="branch-desc">Menyusun urutan langkah penyelesaian secara logis & bertahap.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Rangkuman 4 Pilar Utama -->
+    <h2 class="section-title"><span>💡</span> Rangkuman 4 Pilar Berpikir Komputasional</h2>
+    <div class="pillar-grid">
+      
+      <div class="pillar-box">
+        <div>
+          <span class="pillar-badge pb-green">Pilar 1</span>
+          <h3 class="pillar-name">Dekomposisi</h3>
+          <p class="pillar-concept">Ketika menghadapi tugas besar (seperti kamar berantakan), bagi menjadi bagian kecil agar tidak lelah dan bingung.</p>
+        </div>
+        <div class="pillar-example">
+          <strong>Contoh Riil:</strong>
+          Menyapu lantai → Merapikan meja → Menyusun buku di rak.
+        </div>
+      </div>
+
+      <div class="pillar-box">
+        <div>
+          <span class="pillar-badge pb-blue">Pilar 2</span>
+          <h3 class="pillar-name">Pengenalan Pola</h3>
+          <p class="pillar-concept">Melihat kejadian berulang pada bentuk, warna, angka, atau rutinitas harian untuk mempercepat solusi.</p>
+        </div>
+        <div class="pillar-example">
+          <strong>Contoh Riil:</strong>
+          Setiap bangun terlambat, pasti terburu-buru dan ada barang yang tertinggal.
+        </div>
+      </div>
+
+      <div class="pillar-box">
+        <div>
+          <span class="pillar-badge pb-peach">Pilar 3</span>
+          <h3 class="pillar-name">Abstraksi</h3>
+          <p class="pillar-concept">Memilih informasi yang benar-benar dibutuhkan dan menyisihkan hal yang tidak berhubungan dengan inti masalah.</p>
+        </div>
+        <div class="pillar-example">
+          <strong>Contoh Riil:</strong>
+          Menggambar denah sekolah hanya mencantumkan ruang kelas, kantin, lapangan (tanpa menggambar setiap jendela).
+        </div>
+      </div>
+
+      <div class="pillar-box">
+        <div>
+          <span class="pillar-badge pb-yellow">Pilar 4</span>
+          <h3 class="pillar-name">Algoritma</h3>
+          <p class="pillar-concept">Menyusun instruksi secara teratur dan runtut. Jika instruksi salah urutan, tujuannya tidak akan berhasil.</p>
+        </div>
+        <div class="pillar-example">
+          <strong>Contoh Riil:</strong>
+          Memakai kaus kaki terlebih dahulu sebelum memasukkan kaki ke dalam sepatu.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 3. Metode Analisis: 5 Mengapa -->
+    <h2 class="section-title"><span>🔎</span> Analisis Masalah: Rantai 5 Mengapa</h2>
+    <div class="five-why-card">
+      <p style="margin-bottom: 20px; color: var(--text-muted); font-size: 0.95rem;">
+        Untuk menemukan akar penyebab masalah, Koka mengajarkan metode bertanya <strong>"Mengapa?"</strong> secara berantai:
+      </p>
+
+      <div class="why-step">
+        <div class="why-number">1</div>
+        <div class="why-content">
+          <div class="q">Mengapa kamar selalu berantakan?</div>
+          <div class="a">Karena aku tidak langsung merapikan setelah belajar.</div>
+        </div>
+      </div>
+
+      <div class="why-step">
+        <div class="why-number">2</div>
+        <div class="why-content">
+          <div class="q">Mengapa tidak langsung dirapikan?</div>
+          <div class="a">Karena terburu-buru harus segera pergi.</div>
+        </div>
+      </div>
+
+      <div class="why-step">
+        <div class="why-number">3</div>
+        <div class="why-content">
+          <div class="q">Mengapa buru-buru pergi?</div>
+          <div class="a">Karena tidak memiliki jadwal kegiatan harian yang teratur.</div>
+        </div>
+      </div>
+
+      <div class="why-step">
+        <div class="why-number">4</div>
+        <div class="why-content">
+          <div class="q">Mengapa belum punya jadwal harian?</div>
+          <div class="a">Karena belum pernah membuat daftar rencana kegiatan.</div>
+        </div>
+      </div>
+
+      <div class="why-step">
+        <div class="why-number">5</div>
+        <div class="why-content">
+          <div class="q">Mengapa belum pernah membuat daftar?</div>
+          <div class="a"><strong>Akar Masalah:</strong> Belum tahu cara menyusun jadwal kegiatan harian yang baik.</div>
+        </div>
+      </div>
+      <div style="margin-top: 15px; padding: 12px; background: var(--accent-soft-green); border-radius: var(--radius-sm); font-size: 0.9rem; color: var(--accent-green); font-weight: 600;">
+        💡 Solusi Utama: Buat jadwal kegiatan harian agar ada waktu khusus untuk belajar dan merapikan perlengkapan.
+      </div>
+    </div>
+
+    <!-- 4. Glosarium Interaktif -->
+    <h2 class="section-title"><span>📖</span> Glosarium Istilah & Artinya</h2>
+    <div class="glossary-wrapper">
+      <input type="text" id="glossarySearch" class="search-box" placeholder="Ketik untuk mencari istilah (misal: algoritma, abstraksi, pseudocode)..." onkeyup="searchGlossary()" />
+      
+      <div class="glossary-list" id="glossaryContainer">
+        <div class="glossary-item">
+          <div class="glossary-term">Berpikir Komputasional</div>
+          <div class="glossary-def">Cara berpikir yang teratur, sistematis, dan logis untuk memecahkan masalah sehari-hari layaknya komputer.</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-term">Dekomposisi</div>
+          <div class="glossary-def">Proses memecah masalah yang besar atau rumit menjadi bagian-bagian kecil yang lebih mudah dikelola.</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-term">Pengenalan Pola</div>
+          <div class="glossary-def">Kemampuan mengenali kesamaan, keteraturan, atau perulangan dalam suatu kejadian atau masalah.</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-term">Abstraksi</div>
+          <div class="glossary-def">Keterampilan memusatkan perhatian pada hal-hal penting dan mengabaikan rincian yang tidak relevan.</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-term">Algoritma</div>
+          <div class="glossary-def">Urutan instruksi langkah demi langkah yang logis dan runtut untuk menyelesaikan masalah atau mencapai tujuan.</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-term">Pseudocode</div>
+          <div class="glossary-def">Kode semu berupa langkah terstruktur menggunakan bahasa sehari-hari sebelum diubah ke kode pemrograman komputer.</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-term">Analisis Masalah</div>
+          <div class="glossary-def">Upaya mendalami dan mencari tahu apa yang sedang terjadi beserta akar penyebab masalah tersebut.</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-term">Programmer</div>
+          <div class="glossary-def">Orang yang membuat, menulis, dan menyusun instruksi terstruktur untuk dijalankan oleh perangkat komputer atau robot.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Modul Interaktif: Simulasi Pseudocode -->
+    <div class="sim-card">
+      <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--accent-green); margin-bottom: 6px;">
+        🧪 Coba Sendiri: Uji Alur Pseudocode
+      </h3>
+      <p style="font-size: 0.9rem; color: var(--text-muted);">
+        Lihat bagaimana komputer atau robot membaca instruksi logis langkah demi langkah:
+      </p>
+
+      <div class="code-box">
+1. Mulai<br>
+2. Cek jadwal pelajaran esok hari<br>
+3. Masukkan buku & alat tulis ke tas<br>
+4. Letakkan tas di dekat meja belajar<br>
+5. Selesai
+      </div>
+
+      <button class="btn-action" onclick="runSimulation()">Jalankan Instruksi (Simulasi)</button>
+      <div id="sim-output"></div>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      Materi Kurikulum Merdeka • Koding & Kecerdasan Artifisial Kelas V SD/MI • Disarikan secara komprehensif
+    </div>
+  </footer>
+
+  <script>
+    // Fungsi Pencarian Glosarium
+    function searchGlossary() {
+      const input = document.getElementById('glossarySearch').value.toLowerCase();
+      const items = document.querySelectorAll('.glossary-item');
+
+      items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        if (text.includes(input)) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    // Filter Glosarium dari Klik Peta Konsep
+    function filterGlossary(keyword) {
+      const searchBox = document.getElementById('glossarySearch');
+      searchBox.value = keyword;
+      searchGlossary();
+      searchBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    // Simulasi Pseudocode
+    function runSimulation() {
+      const output = document.getElementById('sim-output');
+      output.style.display = 'block';
+      output.innerHTML = '<em>Memulai proses...</em>';
+      
+      const steps = [
+        "Langkah 1: Status dimulai.",
+        "Langkah 2: Membaca jadwal esok hari (Matematika & IPAS).",
+        "Langkah 3: Buku dan alat tulis berhasil dimasukkan.",
+        "Langkah 4: Tas diletakkan di tempat aman dan mudah terlihat.",
+        "Langkah 5: Selesai! Tas siap untuk esok hari tanpa ada barang tertinggal."
+      ];
+
+      let i = 0;
+      output.innerHTML = "";
+      const interval = setInterval(() => {
+        if (i < steps.length) {
+          const p = document.createElement("div");
+          p.style.marginBottom = "4px";
+          p.innerHTML = "✅ " + steps[i];
+          output.appendChild(p);
+          i++;
+        } else {
+          clearInterval(interval);
+        }
+      }, 400);
+    }
+  </script>
+</body>
+</html>
