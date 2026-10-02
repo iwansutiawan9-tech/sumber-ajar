@@ -1,1 +1,578 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rangkuman IPAS Bab 2 - Gaya di Sekitar Kita</title>
+  <style>
+    /* =========================================================
+       PENGATURAN UMUM & TATA LETAK
+       ========================================================= */
+    :root {
+      --primary: #1e3a8a;       /* Biru tua formal */
+      --secondary: #0284c7;     /* Biru terang */
+      --accent: #f59e0b;        /* Kuning oranye penanda */
+      --dark: #0f172a;          /* Teks gelap utama */
+      --light-bg: #f8fafc;      /* Abu-abu sangat terang */
+      --border-color: #cbd5e1;  /* Abu-abu garis batas */
+      --danger-bg: #fef2f2;     /* Merah muda miskonsepsi */
+      --danger-border: #f87171;
+      --success-bg: #f0fdf4;    /* Hijau muda konsep benar */
+      --success-border: #4ade80;
+    }
 
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--dark);
+      background-color: #e2e8f0;
+      line-height: 1.6;
+      font-size: 11pt;
+    }
+
+    /* Container Lembar Kertas */
+    .page-container {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 20px auto;
+      background: white;
+      padding: 20mm 18mm;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      position: relative;
+    }
+
+    /* Tombol Interaktif (Hanya Muncul di Layar) */
+    .no-print-toolbar {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      z-index: 1000;
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-print {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      transition: background 0.2s;
+    }
+
+    .btn-print:hover {
+      background-color: #1d4ed8;
+    }
+
+    /* Header & Judul */
+    header {
+      border-bottom: 3px double var(--primary);
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .header-tag {
+      font-size: 9pt;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+      font-weight: 700;
+    }
+
+    h1 {
+      font-size: 18pt;
+      color: var(--primary);
+      margin: 4px 0 6px 0;
+      text-transform: uppercase;
+    }
+
+    .meta-info {
+      font-size: 9.5pt;
+      color: #64748b;
+    }
+
+    /* Heading Bagian */
+    h2 {
+      font-size: 13pt;
+      color: var(--primary);
+      border-left: 5px solid var(--secondary);
+      padding-left: 10px;
+      margin: 18px 0 10px 0;
+      text-transform: uppercase;
+      background-color: var(--light-bg);
+      padding-top: 4px;
+      padding-bottom: 4px;
+    }
+
+    h3 {
+      font-size: 11.5pt;
+      color: var(--dark);
+      margin: 12px 0 6px 0;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 3px;
+    }
+
+    p {
+      margin-bottom: 8px;
+      text-align: justify;
+    }
+
+    ul, ol {
+      margin-left: 20px;
+      margin-bottom: 10px;
+    }
+
+    li {
+      margin-bottom: 4px;
+    }
+
+    /* =========================================================
+       PETA KONSEP (CSS PURE TREE/BOXES)
+       ========================================================= */
+    .concept-map {
+      background-color: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 15px 0 25px 0;
+    }
+
+    .node-root {
+      background-color: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: bold;
+      width: fit-content;
+      margin: 0 auto 15px auto;
+      font-size: 11pt;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .map-branches {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .branch-card {
+      background: white;
+      border: 1px solid #94a3b8;
+      border-radius: 6px;
+      padding: 10px;
+      font-size: 9pt;
+    }
+
+    .branch-card-header {
+      background-color: #e0f2fe;
+      color: #0369a1;
+      font-weight: bold;
+      padding: 4px 6px;
+      border-radius: 4px;
+      margin-bottom: 6px;
+      text-align: center;
+      border-bottom: 2px solid var(--secondary);
+    }
+
+    .branch-card ul {
+      margin-left: 14px;
+      margin-bottom: 0;
+    }
+
+    .branch-card li {
+      margin-bottom: 3px;
+    }
+
+    /* =========================================================
+       TABEL & KOTAK SOROTAN
+       ========================================================= */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 9.5pt;
+    }
+
+    th, td {
+      border: 1px solid var(--border-color);
+      padding: 7px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background-color: #f1f5f9;
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+    .highlight-box {
+      background-color: #eff6ff;
+      border-left: 4px solid var(--secondary);
+      padding: 10px 14px;
+      margin: 12px 0;
+      border-radius: 0 6px 6px 0;
+    }
+
+    /* Kartu Miskonsepsi */
+    .misconception-card {
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      page-break-inside: avoid;
+    }
+
+    .misconception-header {
+      background-color: #f1f5f9;
+      font-weight: bold;
+      padding: 6px 12px;
+      font-size: 10pt;
+      color: #334155;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .misconception-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding: 8px 12px;
+      gap: 12px;
+      font-size: 9.5pt;
+    }
+
+    .box-wrong {
+      background-color: var(--danger-bg);
+      border-left: 3px solid var(--danger-border);
+      padding: 6px 10px;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .box-correct {
+      background-color: var(--success-bg);
+      border-left: 3px solid var(--success-border);
+      padding: 6px 10px;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .box-strategy {
+      grid-column: span 2;
+      background-color: #faf5ff;
+      border-left: 3px solid #a855f7;
+      padding: 6px 10px;
+      font-size: 9pt;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .label {
+      font-weight: bold;
+      display: inline-block;
+      margin-bottom: 2px;
+    }
+
+    .label-wrong { color: #dc2626; }
+    .label-correct { color: #16a34a; }
+    .label-strategy { color: #7e22ce; }
+
+    /* Footer Halaman */
+    .footer-doc {
+      margin-top: 25px;
+      border-top: 1px solid var(--border-color);
+      padding-top: 8px;
+      font-size: 8.5pt;
+      color: #94a3b8;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* =========================================================
+       CSS PRINT RULES (UNTUK PDF/CETAK RAPI)
+       ========================================================= */
+    @page {
+      size: A4 portrait;
+      margin: 15mm 15mm;
+    }
+
+    @media print {
+      body {
+        background-color: white;
+        color: black;
+      }
+
+      .page-container {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+      }
+
+      .no-print-toolbar {
+        display: none !important;
+      }
+
+      h2 {
+        break-after: avoid;
+        margin-top: 15px;
+      }
+
+      h3 {
+        break-after: avoid;
+      }
+
+      .misconception-card, .concept-map, table {
+        break-inside: avoid;
+      }
+
+      .page-break {
+        page-break-before: always;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Tombol Cetak / PDF Cepat -->
+  <div class="no-print-toolbar">
+    <button class="btn-print" onclick="window.print()">🖨️ Cetak Dokumen / Simpan PDF</button>
+  </div>
+
+  <div class="page-container">
+
+    <!-- Header Dokumen -->
+    <header>
+      <div class="header-tag">Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi • Kurikulum Merdeka</div>
+      <h1>Rangkuman Pembelajaran IPAS Kelas IV SD</h1>
+      <div class="meta-info">
+        <strong>BAB 2: GAYA DI SEKITAR KITA</strong> | Modul Pengayaan & Analisis Miskonsepsi
+      </div>
+    </header>
+
+    <!-- PETA KONSEP -->
+    <section>
+      <h2>Peta Konsep Pembelajaran</h2>
+      <div class="concept-map">
+        <div class="node-root">GAYA (Tarikan & Dorongan)</div>
+        <div class="map-branches">
+          
+          <!-- Cabang 1 -->
+          <div class="branch-card">
+            <div class="branch-card-header">1. Pengaruh Gaya</div>
+            <ul>
+              <li><strong>Arah & Kekuatan:</strong> Menentukan gerak.</li>
+              <li><strong>Benda Diam:</strong> Menjadi bergerak.</li>
+              <li><strong>Benda Bergerak:</strong> Diam/berubah arah.</li>
+              <li><strong>Bentuk Benda:</strong> Mengubah wujud.</li>
+            </ul>
+          </div>
+
+          <!-- Cabang 2 -->
+          <div class="branch-card">
+            <div class="branch-card-header">2. Ragam Jenis Gaya</div>
+            <ul>
+              <li><strong>Gaya Otot:</strong> Dihasilkan otot tubuh.</li>
+              <li><strong>Gaya Gesek:</strong> Menghambat gerak.</li>
+              <li><strong>Gaya Magnet:</strong> Menarik bahan besi.</li>
+              <li><strong>Gaya Pegas:</strong> Sifat elastis benda.</li>
+              <li><strong>Gaya Gravitasi:</strong> Tarikan pusat bumi.</li>
+            </ul>
+          </div>
+
+          <!-- Cabang 3 -->
+          <div class="branch-card">
+            <div class="branch-card-header">3. Eksplorasi Khusus</div>
+            <ul>
+              <li><strong>Sifat Gesek:</strong> Luas permukaan & kekasaran bidang.</li>
+              <li><strong>Sifat Magnet:</strong> 2 kutub (U & S), tarik-menarik / tolak-menolak.</li>
+              <li><strong>Benda Feromagnetik:</strong> Besi, baja, nikel.</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- INTISARI MATERI BAB 2 -->
+    <section>
+      <h2>I. Rangkuman Materi Pokok</h2>
+      
+      <h3>A. Hakikat dan Sifat Dasar Gaya</h3>
+      <p>
+        <strong>Gaya</strong> adalah interaksi berupa <strong>tarikan</strong> atau <strong>dorongan</strong> yang diberikan pada suatu benda. Gaya memiliki dua unsur utama, yaitu <em>besar (kekuatan)</em> dan <em>arah</em>.
+      </p>
+      <ul>
+        <li><strong>Arah dan Kekuatan:</strong> Jika dua gaya berlawanan memiliki kekuatan sama (contoh: tarik tambang seimbang), benda akan tetap diam. Benda bergerak ke arah yang menerima gaya lebih besar.</li>
+        <li><strong>Pengaruh Terhadap Gerak:</strong> Gaya dapat membuat benda diam menjadi bergerak, mempercepat atau memperlambat gerak benda, serta mengubah arah laju benda.</li>
+        <li><strong>Pengaruh Terhadap Bentuk:</strong> Gaya tekan atau tarik dapat mengubah bentuk benda (misalnya meremas plastisin, kaleng terinjak, atau adonan kue).</li>
+      </ul>
+
+      <h3>B. Macam-Macam Gaya dalam Kehidupan Sehari-hari</h3>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 25%;">Jenis Gaya</th>
+            <th style="width: 45%;">Definisi & Sifat</th>
+            <th style="width: 30%;">Contoh Nyata</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Gaya Otot</strong></td>
+            <td>Gaya yang dihasilkan oleh kontraksi otot tubuh manusia atau hewan (termasuk gaya sentuh).</td>
+            <td>Mengangkat kotak, menendang bola, mengayuh sepeda.</td>
+          </tr>
+          <tr>
+            <td><strong>Gaya Gesek</strong></td>
+            <td>Gaya hambat yang terjadi saat dua permukaan benda saling bersentuhan. Arahnya selalu berlawanan arah gerak benda.</td>
+            <td>Sol sepatu dengan lantai, rem sepeda pada roda.</td>
+          </tr>
+          <tr>
+            <td><strong>Gaya Magnet</strong></td>
+            <td>Gaya tarikan atau dorongan tak sentuh yang dihasilkan oleh medan magnet.</td>
+            <td>Magnet kompas, pintu kulkas, pemilah rongsokan besi.</td>
+          </tr>
+          <tr>
+            <td><strong>Gaya Pegas</strong></td>
+            <td>Gaya lenting yang dihasilkan benda elastis saat diregangkan atau ditekan.</td>
+            <td>Bermain trampolin, menarik anak panah pada busur.</td>
+          </tr>
+          <tr>
+            <td><strong>Gaya Gravitasi</strong></td>
+            <td>Gaya tarik bumi yang menarik seluruh benda bermassa ke arah pusat bumi.</td>
+            <td>Buah kelapa jatuh dari pohon, bola yang melambung kembali turun.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>C. Penyelidikan Mendalam: Sifat Gaya Gesek</h3>
+      <p>
+        Gaya gesek memiliki sifat unik dan dipengaruhi oleh kondisi fisik permukaan bidang yang bersentuhan:
+      </p>
+      <ul>
+        <li><strong>Kekasaran Permukaan:</strong> Semakin kasar permukaan benda, semakin <em>besar</em> gaya gesek yang dihasilkan (gerak benda menjadi lebih lambat). Sebaliknya, permukaan licin menghasilkan gaya gesek yang <em>kecil</em>.</li>
+        <li><strong>Luas Permukaan Sentuh:</strong> Pada udara/fluida terbuka, benda dengan permukaan bidang bentang lebih luas (seperti parasut terbuka) mengalami hambatan gesek udara yang jauh lebih besar.</li>
+        <li><strong>Manfaat vs. Kerugian:</strong>
+          <ul>
+            <li><em>Bermanfaat:</em> Mencegah tergelincir saat berjalan (alur sepatu), menghentikan kendaraan (rem).</li>
+            <li><em>Merugikan:</em> Mengikis ban kendaraan, membuang energi mesin (diatasi dengan pelumas/oli mesin).</li>
+          </ul>
+        </li>
+      </ul>
+
+      <div class="page-break"></div>
+
+      <h3>D. Penyelidikan Mendalam: Sifat Kemagnetan</h3>
+      <div class="highlight-box">
+        <strong>Aturan Dasar Kutub Magnet:</strong> Magnet selalu memiliki 2 kutub, yaitu <strong>Kutub Utara (U)</strong> dan <strong>Kutub Selatan (S)</strong>. Kutub yang senama bila didekatkan akan <em>tolak-menolak</em> ($U \leftrightarrow U$ atau $S \leftrightarrow S$), sedangkan kutub yang tidak senama akan <em>tarik-menarik</em> ($U \rightarrow \leftarrow S$).
+      </div>
+      <ul>
+        <li><strong>Sifat Tarikan Magnet:</strong> Magnet hanya dapat menarik benda-benda yang mengandung bahan feromagnetik tertentu (terutama besi dan baja). Magnet <strong>tidak dapat</strong> menarik semua jenis logam (misal aluminium, tembaga murni, emas) apalagi nonlogam (kayu, plastik, kaca).</li>
+        <li><strong>Kekuatan Kutub:</strong> Kekuatan gaya magnet terpusat paling kuat berada di <em>ujung-ujung kutubnya</em>.</li>
+      </ul>
+    </section>
+
+    <!-- IDENTIFIKASI POTENSI MISKONSEPSI -->
+    <section>
+      <h2>II. Analisis Potensi Miskonsepsi & Remediasi Guru</h2>
+      <p style="font-size: 9pt; color: #475569; margin-bottom: 12px;">
+        Berikut adalah inventarisasi kesalahpahaman konsep yang sering terjadi pada peserta didik Fase B (Kelas 4 SD) beserta koreksi ilmiah dan pendekatan pedagogis solutif:
+      </p>
+
+      <!-- Miskonsepsi 1 -->
+      <div class="misconception-card">
+        <div class="misconception-header">1. Konsep "Benda Bergerak Pasti Memiliki Gaya di Dalam Dirinya"</div>
+        <div class="misconception-body">
+          <div class="box-wrong">
+            <span class="label label-wrong">❌ Miskonsepsi Siswa:</span><br>
+            Siswa menganggap bola yang sedang menggelinding membawa "gaya dorong" di dalam dirinya. Begitu gaya di dalam bola itu "habis", bola pun berhenti.
+          </div>
+          <div class="box-correct">
+            <span class="label label-correct">✔️ Konsep Ilmiah:</span><br>
+            Gaya bukanlah zat yang dapat disimpan dalam benda. Bola menggelinding karena telah menerima gaya dorong dari luar. Bola berhenti karena adanya gaya luar lain yang melawannya, yaitu <strong>gaya gesek</strong> lantai dan hambatan udara.
+          </div>
+          <div class="box-strategy">
+            <span class="label label-strategy">💡 Strategi Guru:</span> 
+            Gunakan analogi mendorong kelereng di atas karpet berbulu vs lantai keramik licin. Tanyakan: <em>"Apakah dorongan awal tanganmu sama? Mengapa berhentinya berbeda?"</em> Tunjukkan bahwa gaya gesek-lah yang memperlambat dan menghentikannya.
+          </div>
+        </div>
+      </div>
+
+      <!-- Miskonsepsi 2 -->
+      <div class="misconception-card">
+        <div class="misconception-header">2. Konsep "Magnet Menarik Semua Jenis Benda Logam"</div>
+        <div class="misconception-body">
+          <div class="box-wrong">
+            <span class="label label-wrong">❌ Miskonsepsi Siswa:</span><br>
+            Siswa beranggapan bahwa seluruh benda berbahan logam (seperti uang koin aluminium, kaleng soda, kabel tembaga, sendok stainless steel tipis) pasti menempel pada magnet.
+          </div>
+          <div class="box-correct">
+            <span class="label label-correct">✔️ Konsep Ilmiah:</span><br>
+            Magnet hanya menarik logam yang bersifat magnetik (feromagnetik), khususnya <strong>besi, baja, kobalt, dan nikel</strong>. Logam seperti aluminium, emas, perak, dan tembaga bersifat nonmagnetik sehingga tidak dapat ditarik magnet.
+          </div>
+          <div class="box-strategy">
+            <span class="label label-strategy">💡 Strategi Guru:</span> 
+            Sediakan stasiun uji magnet sederhana: sediakan paku besi, koin Rp500/Rp1000 aluminium, kertas timah, dan perhiasan perak tiruan. Biarkan siswa menguji dan mengelompokkan logam yang menempel dan yang tidak.
+          </div>
+        </div>
+      </div>
+
+      <!-- Miskonsepsi 3 -->
+      <div class="misconception-card">
+        <div class="misconception-header">3. Konsep "Gaya Gesek Selalu Merugikan dan Harus Dihilangkan"</div>
+        <div class="misconception-body">
+          <div class="box-wrong">
+            <span class="label label-wrong">❌ Miskonsepsi Siswa:</span><br>
+            Siswa memandang gaya gesek semata-mata sebagai penghambat gerak, penyebab ausnya benda, dan sesuatu yang buruk yang selalu harus diminimalkan.
+          </div>
+          <div class="box-correct">
+            <span class="label label-correct">✔️ Konsep Ilmiah:</span><br>
+            Gaya gesek sangat esensial bagi kehidupan. Tanpa gaya gesek antara telapak kaki dan lantai, manusia tidak akan pernah bisa berjalan dan akan selalu tergelincir. Tanpa gaya gesek, rem kendaraan tidak akan berfungsi.
+          </div>
+          <div class="box-strategy">
+            <span class="label label-strategy">💡 Strategi Guru:</span> 
+            Berikan tantangan studi kasus: <em>"Bayangkan sebuah dunia di mana semua lantai dilapisi es dan minyak super licin tanpa ada gesekan sama sekali. Bisakah mobil berhenti? Bisakah kita melangkah maju?"</em>
+          </div>
+        </div>
+      </div>
+
+      <!-- Miskonsepsi 4 -->
+      <div class="misconception-card">
+        <div class="misconception-header">4. Konsep "Gaya Berat dan Massa Benda Dipengaruhi Bentuk Benda"</div>
+        <div class="misconception-body">
+          <div class="box-wrong">
+            <span class="label label-wrong">❌ Miskonsepsi Siswa:</span><br>
+            Siswa menganggap kertas yang diremas menjadi gumpalan bulat akan jatuh lebih cepat daripada kertas lembaran karena kertas gumpalan menjadi "lebih berat".
+          </div>
+          <div class="box-correct">
+            <span class="label label-correct">✔️ Konsep Ilmiah:</span><br>
+            Massa dan gaya gravitasi kedua kertas sama. Kertas lembaran jatuh lebih lambat karena memiliki <strong>luas permukaan yang lebih lebar</strong> sehingga menerima <strong>gaya gesek udara</strong> yang jauh lebih besar dibandingkan gumpalan kertas.
+          </div>
+          <div class="box-strategy">
+            <span class="label label-strategy">💡 Strategi Guru:</span> 
+            Lakukan demonstrasi menjatuhkan selembar kertas utuh dan selembar kertas identik yang telah diremas secara bersamaan dari ketinggian yang sama. Diskusikan perbedaan hambatannya, kaitkan dengan prinsip kerja parasut.
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Footer Lembar Kerja -->
+    <footer class="footer-doc">
+      <span>IPAS Kelas 4 SD - Kurikulum Merdeka</span>
+      <span>Rangkuman Pembelajaran Terpadu & Refleksi Pedagogis</span>
+      <span>Halaman 1 dari 1 (Ringkas)</span>
+    </footer>
+
+  </div>
+
+</body>
+</html>
